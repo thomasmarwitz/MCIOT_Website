@@ -93,26 +93,32 @@ function getFood() {
 
 window.addEventListener("deviceorientation", handleOrientation, true);
 
+const sensitivity = 20;
 function handleOrientation(event) { 
-	// var ax = event.acceleration.x;
-	// var ay = event.accelerationIncludingGravity.y
-	// var az = event.accelerationIncludingGravity.z
-    // let pitch = Math.atan(ax / Math.sqrt((Math.pow(ay,2) + Math.pow(az,2))) );
-    // let roll = Math.atan(ay / Math.sqrt((Math.pow(ax,2) + Math.pow(az,2))) );
-    // let theta = Math.atan(Math.sqrt((Math.pow(ax,2) + Math.pow(ay,2))) /az);
-    const absolute = event.absolute;
     const alpha = event.alpha.toFixed(2);
     const beta = event.beta.toFixed(2);
     const gamma = event.gamma.toFixed(2);
 
-    const output_angle = document.getElementById("angle-data");
-    output_angle.innerHTML = "alpha: " + alpha + "<br>" + "beta: " + beta + "<br>" + "gamma: " + gamma;
+    // beta pos > 20    down
+    // beta neg < -20   up
+    // gamma pos > 20   right
+    // gamma neg < -20  left
+    
+    if (beta > sensitivity) {
+        directionCommand = DIRECTION.down;
+    } else if (beta < -sensitivity) {
+        directionCommand = DIRECTION.up;
+    } else if (gamma > sensitivity) {
+        directionCommand = DIRECTION.right;
+    } else if (gamma < -sensitivity) {
+        directionCommand = DIRECTION.left;
+    }
+
+
+    //const output_angle = document.getElementById("angle-data");
+    //output_angle.innerHTML = "alpha: " + alpha + "<br>" + "beta: " + beta + "<br>" + "gamma: " + gamma;
     
 }
-
-// window.addEventListener("deviceorientation", function(event) {
-// 	document.querySelector("#mag").innerHTML = "alpha = " + event.alpha + "<br>" + "beta = " + event.beta + "<br>" + "gamma = " + event.gamma;
-// }, true);
 
 function gameLoopFunc() {
     {
