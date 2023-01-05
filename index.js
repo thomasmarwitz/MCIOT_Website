@@ -95,9 +95,9 @@ window.addEventListener("deviceorientation", handleOrientation, true);
 
 const sensitivity = 20;
 function handleOrientation(event) { 
-    const alpha = event.alpha.toFixed(2);
-    const beta = event.beta.toFixed(2);
-    const gamma = event.gamma.toFixed(2);
+    const alpha = event.alpha; //.toFixed(2);
+    const beta = event.beta; //.toFixed(2);
+    const gamma = event.gamma; //.toFixed(2);
 
     // beta pos > 20    down
     // beta neg < -20   up
