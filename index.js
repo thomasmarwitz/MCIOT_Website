@@ -101,9 +101,9 @@ function handleOrientation(event) {
     // let roll = Math.atan(ay / Math.sqrt((Math.pow(ax,2) + Math.pow(az,2))) );
     // let theta = Math.atan(Math.sqrt((Math.pow(ax,2) + Math.pow(ay,2))) /az);
     const absolute = event.absolute;
-    const alpha = event.alpha;
-    const beta = event.beta;
-    const gamma = event.gamma;
+    const alpha = event.alpha.toFixed(2);
+    const beta = event.beta.toFixed(2);
+    const gamma = event.gamma.toFixed(2);
 
     const output_angle = document.getElementById("angle-data");
     output_angle.innerHTML = "alpha: " + alpha + "<br>" + "beta: " + beta + "<br>" + "gamma: " + gamma;
