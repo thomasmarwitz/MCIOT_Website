@@ -4,6 +4,28 @@ start.addEventListener("click", startGame);
 const reset = document.getElementById("stop-game")
 reset.addEventListener("click", destroyGame);
 
+function permission () {
+    if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
+        // (optional) Do something before API request prompt.
+        DeviceMotionEvent.requestPermission()
+            .then( response => {
+            // (optional) Do something after API prompt dismissed.
+            if ( response == "granted" ) {
+                window.addEventListener("deviceorientation", handleOrientation, true);
+            }
+        })
+            .catch( console.error )
+    }
+}
+
+permission();
+
+// if device is in portrait mode
+if (window.innerHeight < window.innerWidth) {
+    const el = document.getElementById("sensitivity-control")
+    console.log(el)
+    el.style.display = "none";
+}
 
 
 const DIRECTION = Object.freeze({
@@ -93,7 +115,15 @@ function getFood() {
 
 window.addEventListener("deviceorientation", handleOrientation, true);
 
-const sensitivity = 20;
+var sensitivity = 12;
+
+const sensitivityControl = document.getElementById("typeNumber");
+sensitivityControl.addEventListener("change", function(event) {
+    sensitivity = event.target.value;
+    console.log(sensitivity);
+});
+
+const tweak = 2;
 function handleOrientation(event) { 
     const alpha = event.alpha; //.toFixed(2);
     const beta = event.beta; //.toFixed(2);
@@ -104,9 +134,9 @@ function handleOrientation(event) {
     // gamma pos > 20   right
     // gamma neg < -20  left
     
-    if (beta > sensitivity) {
+    if (beta - tweak > sensitivity) {
         directionCommand = DIRECTION.down;
-    } else if (beta < -sensitivity) {
+    } else if (beta - tweak < -sensitivity) {
         directionCommand = DIRECTION.up;
     } else if (gamma > sensitivity) {
         directionCommand = DIRECTION.right;
