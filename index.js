@@ -91,18 +91,23 @@ function getFood() {
     return food;
 }
 
-window.ondevicemotion = function(event) { 
-	var ax = event.acceleration.x;
-	var ay = event.accelerationIncludingGravity.y
-	var az = event.accelerationIncludingGravity.z
-    let pitch = Math.atan(ax / Math.sqrt((Math.pow(ay,2) + Math.pow(az,2))) );
-    let roll = Math.atan(ay / Math.sqrt((Math.pow(ax,2) + Math.pow(az,2))) );
-    let theta = Math.atan(Math.sqrt((Math.pow(ax,2) + Math.pow(ay,2))) /az);
+window.addEventListener("deviceorientation", handleOrientation, true);
+
+function handleOrientation(event) { 
+	// var ax = event.acceleration.x;
+	// var ay = event.accelerationIncludingGravity.y
+	// var az = event.accelerationIncludingGravity.z
+    // let pitch = Math.atan(ax / Math.sqrt((Math.pow(ay,2) + Math.pow(az,2))) );
+    // let roll = Math.atan(ay / Math.sqrt((Math.pow(ax,2) + Math.pow(az,2))) );
+    // let theta = Math.atan(Math.sqrt((Math.pow(ax,2) + Math.pow(ay,2))) /az);
+    const absolute = event.absolute;
+    const alpha = event.alpha;
+    const beta = event.beta;
+    const gamma = event.gamma;
 
     const output_angle = document.getElementById("angle-data");
-    output_angle.innerText = "pitch: " + pitch + " roll: " + roll + " theta: " + theta;
-    const output_sensor = document.getElementById("sensor-data");
-    output_sensor.innerText = "ax: " + ax + " ay: " + ay + " az: " + az;
+    output_angle.innerHTML = "alpha: " + alpha + "<br>" + "beta: " + beta + "<br>" + "gamma: " + gamma;
+    
 }
 
 // window.addEventListener("deviceorientation", function(event) {
