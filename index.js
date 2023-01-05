@@ -222,7 +222,6 @@ let granted = false;
 function startGame() {
     if (!granted) {
         permission();
-        return;
     }
     if (gameLoop !== null) return;
 
