@@ -13,14 +13,13 @@ function permission () {
                 alert("response")
             // (optional) Do something after API prompt dismissed.
             if ( response == "granted" ) {
+                granted = true;
                 window.addEventListener("deviceorientation", handleOrientation, true);
             }
         })
             .catch( console.error )
     }
 }
-
-permission();
 
 // if device is in portrait mode
 if (window.innerHeight < window.innerWidth) {
@@ -221,7 +220,12 @@ function includes(arr, item) {
 }
 
 let gameLoop = null;
+let granted = false;
 function startGame() {
+    if (!granted) {
+        permission();
+        return;
+    }
     if (gameLoop !== null) return;
 
     currentSnake = [[0, 0]];
