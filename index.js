@@ -7,8 +7,10 @@ reset.addEventListener("click", destroyGame);
 function permission () {
     if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
         // (optional) Do something before API request prompt.
+        alert("requesting permission")
         DeviceMotionEvent.requestPermission()
             .then( response => {
+                alert("response")
             // (optional) Do something after API prompt dismissed.
             if ( response == "granted" ) {
                 window.addEventListener("deviceorientation", handleOrientation, true);
