@@ -1,0 +1,42 @@
+#start-game {
+    
+}
+
+
+#btn-holder {
+    margin-top: 0.5rem;
+}
+
+#canvas {
+    border: 1px solid black;
+    height: 75vh;
+    width: 75vh;
+    background-color: #F0EAD6;
+}
+
+
+@media (orientation: portrait) {
+    #canvas {
+        width: 75vw;
+        height: 75vw;
+    }
+  }
+/* #game-holder {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+} */
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#highscore {
+    margin-top: 1rem;
+}
