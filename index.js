@@ -99,7 +99,10 @@ window.ondevicemotion = function(event) {
     let roll = Math.atan(ay / Math.sqrt((Math.pow(ax,2) + Math.pow(az,2))) );
     let theta = Math.atan(Math.sqrt((Math.pow(ax,2) + Math.pow(ay,2))) /az);
 
-
+    const output_angle = document.getElementById("angle-data");
+    output_angle.innerText = "pitch: " + pitch + " roll: " + roll + " theta: " + theta;
+    const output_sensor = document.getElementById("sensor-data");
+    output_sensor.innerText = "ax: " + ax + " ay: " + ay + " az: " + az;
 }
 
 // window.addEventListener("deviceorientation", function(event) {
